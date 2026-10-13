@@ -33,7 +33,7 @@ body {
   width: 85.8209vw;
   max-width: 39.4708vh;
   max-width: 39.4708dvh;
-  aspect-ratio: 345 / 485.3793;
+  aspect-ratio: 345 / 486.339;
   padding: 0;
   border: 0;
   appearance: none;
@@ -48,7 +48,7 @@ body {
   .poster-slot::before {
     content: "";
     display: block;
-    padding-top: 140.6897%;
+    padding-top: 140.9678%;
   }
 }
 
