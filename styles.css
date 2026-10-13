@@ -90,7 +90,7 @@ body {
 }
 
 .invitation-video,
-.invitation-fallback img,
+.invitation-fallback,
 .card-back img {
   display: block;
   width: 100%;

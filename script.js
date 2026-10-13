@@ -4,14 +4,17 @@ const fallback = invitation.querySelector('.invitation-fallback');
 let fallbackActive = false;
 let playbackStarted = false;
 
+fallback.addEventListener('error', () => {
+  if (fallback.dataset.gifLoaded) return;
+  fallback.dataset.gifLoaded = 'true';
+  fallback.src = fallback.dataset.gifSrc;
+});
+
 const useFallback = () => {
   if (fallbackActive) return;
   fallbackActive = true;
 
-  const source = fallback.querySelector('source');
-  const image = fallback.querySelector('img');
-  source.srcset = source.dataset.srcset;
-  image.src = image.dataset.src;
+  fallback.src = fallback.dataset.src;
   invitation.classList.add('fallback-active');
   video.pause();
 };
