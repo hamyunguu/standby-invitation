@@ -30,9 +30,9 @@ body {
 .poster-slot {
   position: relative;
   display: block;
-  width: 90vw;
-  max-width: 43.5vh;
-  max-width: 43.5dvh;
+  width: 98vw;
+  max-width: 50vh;
+  max-width: 50dvh;
   aspect-ratio: 345 / 486.339;
   padding: 0;
   border: 0;
@@ -93,6 +93,13 @@ body {
   object-fit: contain;
   pointer-events: none;
   user-select: none;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+  .poster-slot {
+    width: calc(100vw - 50px);
+    max-width: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
