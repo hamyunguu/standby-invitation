@@ -24,6 +24,7 @@ body {
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
+  overflow: hidden;
   background: #000;
 }
 
@@ -41,7 +42,19 @@ body {
   background: #000;
   cursor: pointer;
   perspective: 1200px;
+  animation: paper-rise 2600ms cubic-bezier(0.4, 0, 0.2, 1) 180ms backwards;
   -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes paper-rise {
+  from {
+    transform: translateY(calc(50vh + 50%));
+    transform: translateY(calc(50dvh + 50%));
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }
 
 @supports not (aspect-ratio: 1 / 1) {
@@ -82,15 +95,14 @@ body {
 }
 
 .card-front {
-  background: #fff url("assets/invitation-poster.png") center / contain no-repeat;
+  background: #fff;
 }
 
 .card-back {
   transform: rotateY(180deg);
 }
 
-.invitation-video,
-.invitation-fallback,
+.card-front img,
 .card-back img {
   display: block;
   width: 100%;
@@ -98,23 +110,6 @@ body {
   object-fit: contain;
   pointer-events: none;
   user-select: none;
-}
-
-.invitation-fallback {
-  display: none;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.kakao-browser .invitation-video,
-.fallback-active .invitation-video {
-  display: none;
-}
-
-.kakao-browser .invitation-fallback,
-.fallback-active .invitation-fallback {
-  display: block;
 }
 
 @media (max-width: 600px) and (orientation: portrait) {
@@ -125,6 +120,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .poster-slot {
+    animation: none;
+  }
+
   .card {
     transition-duration: 0.01ms;
   }

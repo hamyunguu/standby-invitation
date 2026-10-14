@@ -1,47 +1,6 @@
 const invitation = document.querySelector('.poster-slot');
-const video = invitation.querySelector('video');
-const fallback = invitation.querySelector('.invitation-fallback');
-let fallbackActive = false;
-let playbackStarted = false;
-
-fallback.addEventListener('error', () => {
-  if (fallback.dataset.gifLoaded) return;
-  fallback.dataset.gifLoaded = 'true';
-  fallback.src = fallback.dataset.gifSrc;
-});
-
-const useFallback = () => {
-  if (fallbackActive) return;
-  fallbackActive = true;
-
-  fallback.src = fallback.dataset.src;
-  invitation.classList.add('fallback-active');
-  video.pause();
-};
-
-const playVideo = () => {
-  if (fallbackActive || document.documentElement.classList.contains('kakao-browser')) return;
-  video.muted = true;
-  const attempt = video.play();
-  if (attempt && typeof attempt.catch === 'function') attempt.catch(useFallback);
-};
-
-if (document.documentElement.classList.contains('kakao-browser')) {
-  useFallback();
-} else {
-  video.addEventListener('playing', () => { playbackStarted = true; });
-  video.addEventListener('error', useFallback);
-  window.setTimeout(() => { if (!playbackStarted) useFallback(); }, 3500);
-  playVideo();
-}
-
-window.addEventListener('pageshow', playVideo);
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) playVideo();
-});
 
 invitation.addEventListener('click', () => {
-  playVideo();
   const isFlipped = invitation.getAttribute('aria-pressed') === 'true';
   invitation.setAttribute('aria-pressed', String(!isFlipped));
   invitation.setAttribute(
